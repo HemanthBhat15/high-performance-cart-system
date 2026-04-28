@@ -1,0 +1,78 @@
+/* Container adjustments for a side-by-side or centered look */
+.product-list {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    padding: 24px;
+    width: 100%;
+    max-width: 450px;
+    margin: 20px auto;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  }
+  
+  .product-list h2 {
+    margin-top: 0;
+    font-size: 1.4rem;
+    color: #1a1a1a;
+    letter-spacing: -0.5px;
+  }
+  
+  .product-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .product-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0;
+    transition: all 0.2s ease;
+  }
+  
+  /* Remove border from the last item for a cleaner look */
+  .product-list li:last-child {
+    border-bottom: none;
+  }
+  
+  /* Enhancing the product name and price */
+  .product-list li span {
+    font-weight: 500;
+    color: #4a4a4a;
+  }
+  
+  /* Modern Button Styling */
+  .product-list button {
+    padding: 8px 16px;
+    background-color: #2563eb; /* Modern vibrant blue */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: transform 0.1s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .product-list button:hover {
+    background-color: #1d4ed8;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+    transform: translateY(-1px);
+  }
+  
+  .product-list button:active {
+    transform: translateY(0);
+  }
+  
+  /* Style for 'Remove' or 'Clear' buttons specifically if they exist */
+  .product-list button.remove-btn {
+    background-color: #fee2e2;
+    color: #dc2626;
+  }
+  
+  .product-list button.remove-btn:hover {
+    background-color: #fca5a5;
+    color: #ffffff;
+  }
