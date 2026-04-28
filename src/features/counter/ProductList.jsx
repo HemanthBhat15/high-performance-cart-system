@@ -60,7 +60,7 @@ const ProductList = ({searchQuery}) => {
                                     <p> {product.name}</p>
                                     <p> ${product.price.toFixed(2)} </p>
                                 </div>
-                                <button className='w-full bg-primary text-on-primary py-3 rounded-lg font-label-sm hover:opacity-90 transition-all flex items-center justify-center gap-2' onClick={() => handleAddToCart(product)}>
+                                <button className='w-full text-white bg-primary text-on-primary py-3 rounded-lg font-label-sm hover:opacity-90 transition-all flex items-center justify-center gap-2' onClick={() => handleAddToCart(product)}>
                                     Add to Cart
                                 </button>
                             </div>
