@@ -1,11 +1,11 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { removeItemFromCart, clearCart } from '../counter/CounterSlice'
+import { removeItemFromCart } from '../counter/CounterSlice'
 import "../counter/CartView.css";
 
 const CartView = () => {
     const cartItems = useSelector((state) => state.cart.items);
-    const totalQuantity = useSelector((state) => state.cart.totalQuantity);
+ 
     const totalAmount = useSelector((state) => state.cart.totalAmount);
     const dispatch = useDispatch();
 

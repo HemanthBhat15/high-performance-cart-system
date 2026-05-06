@@ -1,6 +1,5 @@
 import './App.css';
-import CartView from './features/counter/CartView';
-import ProductList from './features/counter/ProductList';
+
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from './features/auth/authSlice';
 import Login from './components/Login';
