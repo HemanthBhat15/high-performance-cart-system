@@ -1,24 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { login } from '../features/auth/authSlice';
 import BagLogo from "../assets/Baglogo.png";
 import Shoppingimg from "../assets/decoratedimage.png";
-import { toast } from 'react-toastify';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const dispatch = useDispatch();
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-
-    const handleLogin = () => {
-        if (!name.trim()) return toast.error('Please enter your name');
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
-            return toast.error('Please enter a valid email');
-        dispatch(login({ name, email }));
+    const navigate = useNavigate();
+    const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm();
+    const onSubmit = (data) => {
+        dispatch(login(data));
+        navigate('/shop');
+        reset();
     };
-
     return (
-        <div className='min-h-screen flex items-center justify-center px-8 py-16 bg-surface'>
+        <form onSubmit={handleSubmit(onSubmit)} className='min-h-screen flex items-center justify-center px-8 py-16 bg-surface'>
             <div className='w-full max-w-[440px] flex flex-col gap-8'>
 
                 {/* Logo + heading */}
@@ -41,44 +39,43 @@ const Login = () => {
                 {/* Card */}
                 <div className='bg-white rounded-xl shadow-sm p-8 flex flex-col gap-5 border border-slate-100'>
                     {/* ✅ removed onClick from button — form onSubmit handles it! */}
-                    <form onSubmit={(e) => { e.preventDefault(); handleLogin(); }}>
 
-                        {/* Name field */}
-                        <div className='flex flex-col gap-1.5 mb-5'>
-                            <label className='text-sm font-medium text-slate-700 text-left'>
-                                Name
-                            </label>
-                            <input
-                                className='w-full px-4 py-2.5 rounded-lg border border-slate-200 text-sm text-slate-900 placeholder:text-slate-400 outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 transition'
-                                placeholder="Your name"
-                                value={name}
-                                onChange={e => setName(e.target.value)}
-                                required
-                            />
-                        </div>
 
-                        {/* Email field */}
-                        <div className='flex flex-col gap-1.5 mb-5'>
-                            <label className='text-sm font-medium text-slate-700 text-left'>
-                                Email
-                            </label>
-                            <input
-                                className='w-full px-4 py-2.5 rounded-lg border border-slate-200 text-sm text-slate-900 placeholder:text-slate-400 outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 transition'
-                                placeholder="you@example.com"
-                                value={email}
-                                onChange={e => setEmail(e.target.value)} // ✅ simplified!
-                                required
-                            />
-                        </div>
+                    {/* Name field */}
+                    <div className='flex flex-col gap-1.5 mb-5'>
+                        <label className='text-sm font-medium text-slate-700 text-left'>
+                            Name
+                        </label>
+                        <input
+                            className='w-full px-4 py-2.5 rounded-lg border border-slate-200 text-sm text-slate-900 placeholder:text-slate-400 outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 transition'
+                            placeholder="Your name"
+                            {...register('name', { required: 'Name is required' })}
+                        />
+                        {errors.name && <p className='text-red-500'>{errors.name.message}</p>}
+                    </div>
 
-                        {/* ✅ type="submit" — no onClick needed! */}
-                        <button
-                            type="submit"
-                            className='w-full py-2.5 px-4 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-lg transition-colors duration-200 mt-1'
-                        >
-                            Login
-                        </button>
-                    </form>
+                    {/* Email field */}
+                    <div className='flex flex-col gap-1.5 mb-5'>
+                        <label className='text-sm font-medium text-slate-700 text-left'>
+                            Email
+                        </label>
+                        <input
+                            className='w-full px-4 py-2.5 rounded-lg border border-slate-200 text-sm text-slate-900 placeholder:text-slate-400 outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/10 transition'
+                            placeholder="you@example.com"
+                            {...register('email', { required: 'Email is required' })}
+                        />
+                        {errors.email && <p className='text-red-500'>{errors.email.message}</p>}
+                    </div>
+
+                    {/* ✅ type="submit" — no onClick needed! */}
+                    <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className='w-full py-2.5 px-4 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-lg transition-colors duration-200 mt-1'
+                    >
+                        {isSubmitting ? 'Logging in...' : 'Login'}
+                    </button>
+
                 </div>
 
                 {/* ✅ loading="lazy" added to fix LCP! */}
@@ -103,7 +100,7 @@ const Login = () => {
                 </div>
 
             </div>
-        </div>
+        </form>
     );
 };
 
