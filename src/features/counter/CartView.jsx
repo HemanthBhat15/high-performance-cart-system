@@ -5,13 +5,13 @@ import "../counter/CartView.css";
 
 const CartView = () => {
     const cartItems = useSelector((state) => state.cart.items);
- 
+ b
     const totalAmount = useSelector((state) => state.cart.totalAmount);
     const dispatch = useDispatch();
 
     return (
         <div className='col-span-12 lg:col-span-4 sticky top-24' >
-            <div className='bg-white rounded-xl shadow-[0_12px_40px_rgba(15,23,42,0.08)] p-md flex flex-col gap-sm'>
+        <div className='bg-white rounded-xl shadow-[0_12px_40px_rgba(15,23,42,0.08)] p-md flex flex-col gap-sm'>
                 <h2>Shopping Cart</h2>
                 {cartItems.length === 0 ? (
                     <p>Your cart is empty.</p>
