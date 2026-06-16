@@ -1,6 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const savedAuth = JSON.parse(localStorage.getItem("auth"));
+let savedAuth = null;
+try {
+  savedAuth = JSON.parse(localStorage.getItem("auth"));
+} catch (e) {
+  console.log("localStorage not available", e);
+}
 console.log(savedAuth);
 let initialState = {
     isLoggedIn: false,
