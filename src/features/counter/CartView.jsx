@@ -5,7 +5,6 @@ import "../counter/CartView.css";
 
 const CartView = () => {
     const cartItems = useSelector((state) => state.cart.items);
- 
     const totalAmount = useSelector((state) => state.cart.totalAmount);
     const dispatch = useDispatch();
 
